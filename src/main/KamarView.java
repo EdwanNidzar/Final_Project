@@ -1,22 +1,55 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main;
 
-/**
- *
- * @author nidza
- */
+import inc.Koneksi;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class KamarView extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form KamarView
-     */
     public KamarView() {
         initComponents();
+        tampil();
     }
+    
+    public final Connection conn = new Koneksi().getConnetion();
+    Statement st;
+    ResultSet rs;
+    DefaultTableModel tabMode;
+    
+    public void tampil(){
+        Object [] baris = {"NO", "ID Kamar", "Nomor Kamar", "Type Kamar", "Rate Kamar"};
+        tabMode = new DefaultTableModel(null, baris);
+        tableKamar.setModel(tabMode);
+        try {
+                String sql = "SELECT * FROM kamar";
+                st = conn.createStatement();
+                rs = st.executeQuery(sql);
+                int no = 0;
+                while (rs.next()){
+                        no++;
+                        String id = rs.getString("id_kamar");
+                        String nk = rs.getString("nomor");
+                        String tk = rs.getString("type");
+                        String rk = rs.getString("rate");
+
+                        Object [] data = {no,id,nk,tk,rk};
+                        tabMode.addRow(data);
+                }
+        } catch (Exception e){
+                System.out.println(e.toString());
+        }
+    }
+    
+    public void clear(){
+        tID.setText(null);
+        tNomor.setText(null);
+        tRate.setText(null);
+        tType.setText(null);
+    }
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,21 +62,21 @@ public class KamarView extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tID = new javax.swing.JTextField();
+        tNomor = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        tType = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        tRate = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        bKeluar = new javax.swing.JButton();
+        bClear = new javax.swing.JButton();
+        bHapus = new javax.swing.JButton();
+        bUbah = new javax.swing.JButton();
+        bSimpan = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableKamar = new javax.swing.JTable();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Input Data"));
 
@@ -55,15 +88,40 @@ public class KamarView extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Rate");
 
-        jButton1.setText("Keluar");
+        bKeluar.setText("Keluar");
+        bKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bKeluarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Clear");
+        bClear.setText("Clear");
+        bClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bClearActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Hapus");
+        bHapus.setText("Hapus");
+        bHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bHapusActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Ubah");
+        bUbah.setText("Ubah");
+        bUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bUbahActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Simpan");
+        bSimpan.setText("Simpan");
+        bSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSimpanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,20 +138,20 @@ public class KamarView extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)))
+                            .addComponent(tRate)
+                            .addComponent(tType)
+                            .addComponent(tID)
+                            .addComponent(tNomor)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton5)
+                        .addComponent(bSimpan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addComponent(bUbah)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
+                        .addComponent(bHapus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(bClear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(bKeluar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -102,32 +160,32 @@ public class KamarView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tNomor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(bKeluar)
+                    .addComponent(bClear)
+                    .addComponent(bHapus)
+                    .addComponent(bUbah)
+                    .addComponent(bSimpan))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Data Kamar"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableKamar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -138,7 +196,12 @@ public class KamarView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tableKamar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableKamarMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableKamar);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -181,13 +244,86 @@ public class KamarView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSimpanActionPerformed
+        // TODO add your handling code here:
+        try {
+            int s;
+            String sql = "INSERT INTO kamar VALUES ('"+tID.getText()+"', '"+tNomor.getText()+"', '"+tType.getText()+"', '"+tRate.getText()+"')";
+            st = conn.createStatement();
+            s = st.executeUpdate(sql);
+            if (s == 1){
+                JOptionPane.showMessageDialog(null, "Sukses");
+                clear();
+                tampil();
+            }
+	} catch (Exception e){
+		System.out.println(e.toString());
+	} 
+    }//GEN-LAST:event_bSimpanActionPerformed
+
+    private void tableKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableKamarMouseClicked
+        // TODO add your handling code here:
+        int baris = tableKamar.getSelectedRow();
+	tID.setText(tableKamar.getValueAt(baris, 1).toString());
+	tNomor.setText(tableKamar.getValueAt(baris, 2).toString());
+	tType.setText(tableKamar.getValueAt(baris, 3).toString());
+        tRate.setText(tableKamar.getValueAt(baris, 4).toString());
+    }//GEN-LAST:event_tableKamarMouseClicked
+
+    private void bClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bClearActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_bClearActionPerformed
+
+    private void bKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bKeluarActionPerformed
+        // TODO add your handling code here:
+        int c = JOptionPane.showConfirmDialog(null, null, "Yakin Ingin Keluar?", JOptionPane.YES_NO_OPTION);
+        if (c == JOptionPane.YES_OPTION){
+            dispose();
+        }
+    }//GEN-LAST:event_bKeluarActionPerformed
+
+    private void bUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUbahActionPerformed
+        // TODO add your handling code here:
+        try {
+            int s;
+            String sql = "UPDATE kamar SET nomor = '"+tNomor.getText()+"', type = '"+tType.getText()+"', rate = '"+tRate.getText()+"' WHERE id_kamar = '"+tID.getText()+"' ";
+            st = conn.createStatement();
+            s = st.executeUpdate(sql);
+            if (s == 1){
+                JOptionPane.showMessageDialog(null, "Sukses");
+                clear();
+                tampil();
+            }
+	} catch (Exception e){
+		System.out.println(e.toString());
+	} 
+    }//GEN-LAST:event_bUbahActionPerformed
+
+    private void bHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHapusActionPerformed
+        // TODO add your handling code here:
+        try {
+            int s;
+            String sql = "DELETE FROM kamar WHERE id_kamar = '"+tID.getText()+"' ";
+            st = conn.createStatement();
+            s = st.executeUpdate(sql);
+            if (s == 1){
+                JOptionPane.showMessageDialog(null, "Sukses");
+                clear();
+                tampil();
+            }
+	} catch (Exception e){
+		System.out.println(e.toString());
+	} 
+    }//GEN-LAST:event_bHapusActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton bClear;
+    private javax.swing.JButton bHapus;
+    private javax.swing.JButton bKeluar;
+    private javax.swing.JButton bSimpan;
+    private javax.swing.JButton bUbah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -195,10 +331,10 @@ public class KamarView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField tID;
+    private javax.swing.JTextField tNomor;
+    private javax.swing.JTextField tRate;
+    private javax.swing.JTextField tType;
+    private javax.swing.JTable tableKamar;
     // End of variables declaration//GEN-END:variables
 }
