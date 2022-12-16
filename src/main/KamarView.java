@@ -246,19 +246,23 @@ public class KamarView extends javax.swing.JInternalFrame {
 
     private void bSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSimpanActionPerformed
         // TODO add your handling code here:
-        try {
-            int s;
-            String sql = "INSERT INTO kamar VALUES ('"+tID.getText()+"', '"+tNomor.getText()+"', '"+tType.getText()+"', '"+tRate.getText()+"')";
-            st = conn.createStatement();
-            s = st.executeUpdate(sql);
-            if (s == 1){
-                JOptionPane.showMessageDialog(null, "Sukses");
-                clear();
-                tampil();
-            }
-	} catch (Exception e){
-		System.out.println(e.toString());
-	} 
+        if (tID.getText().equals("") || tNomor.getText().equals("") || tType.getText().equals("") || tRate.getText().equals("") ){
+            JOptionPane.showMessageDialog(null, "Field Tidak Boleh Kosong");
+        } else {
+            try {
+               int s;
+               String sql = "INSERT INTO kamar VALUES ('"+tID.getText()+"', '"+tNomor.getText()+"', '"+tType.getText()+"', '"+tRate.getText()+"')";
+               st = conn.createStatement();
+               s = st.executeUpdate(sql);
+               if (s == 1){
+                   JOptionPane.showMessageDialog(null, "Sukses");
+                   clear();
+                   tampil();
+               }
+           } catch (Exception e){
+                   System.out.println(e.toString());
+           }    
+        }
     }//GEN-LAST:event_bSimpanActionPerformed
 
     private void tableKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableKamarMouseClicked
@@ -277,7 +281,7 @@ public class KamarView extends javax.swing.JInternalFrame {
 
     private void bKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bKeluarActionPerformed
         // TODO add your handling code here:
-        int c = JOptionPane.showConfirmDialog(null, null, "Yakin Ingin Keluar?", JOptionPane.YES_NO_OPTION);
+        int c = JOptionPane.showConfirmDialog(null, "Yakin Ingin Keluar?", null, JOptionPane.YES_NO_OPTION);
         if (c == JOptionPane.YES_OPTION){
             dispose();
         }
@@ -285,36 +289,46 @@ public class KamarView extends javax.swing.JInternalFrame {
 
     private void bUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUbahActionPerformed
         // TODO add your handling code here:
-        try {
-            int s;
-            String sql = "UPDATE kamar SET nomor = '"+tNomor.getText()+"', type = '"+tType.getText()+"', rate = '"+tRate.getText()+"' WHERE id_kamar = '"+tID.getText()+"' ";
-            st = conn.createStatement();
-            s = st.executeUpdate(sql);
-            if (s == 1){
-                JOptionPane.showMessageDialog(null, "Sukses");
-                clear();
-                tampil();
+        int c = JOptionPane.showConfirmDialog(null, "Ingin Mengubah Data?","Informasi", JOptionPane.YES_NO_OPTION);
+        if (c == JOptionPane.YES_OPTION){
+            if (tID.getText().equals("") || tNomor.getText().equals("") || tType.getText().equals("") || tRate.getText().equals("") ){
+                JOptionPane.showMessageDialog(null, "Field Tidak Boleh Kosong");
+            } else {
+                try {
+                    int s;
+                    String sql = "UPDATE kamar SET nomor = '"+tNomor.getText()+"', type = '"+tType.getText()+"', rate = '"+tRate.getText()+"' WHERE id_kamar = '"+tID.getText()+"' ";
+                    st = conn.createStatement();
+                    s = st.executeUpdate(sql);
+                    if (s == 1){
+                        JOptionPane.showMessageDialog(null, "Sukses");
+                        clear();
+                        tampil();
+                    }
+                } catch (Exception e){
+                        System.out.println(e.toString());
+                } 
             }
-	} catch (Exception e){
-		System.out.println(e.toString());
-	} 
+        }
     }//GEN-LAST:event_bUbahActionPerformed
 
     private void bHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHapusActionPerformed
         // TODO add your handling code here:
-        try {
-            int s;
-            String sql = "DELETE FROM kamar WHERE id_kamar = '"+tID.getText()+"' ";
-            st = conn.createStatement();
-            s = st.executeUpdate(sql);
-            if (s == 1){
-                JOptionPane.showMessageDialog(null, "Sukses");
-                clear();
-                tampil();
-            }
-	} catch (Exception e){
-		System.out.println(e.toString());
-	} 
+        int c = JOptionPane.showConfirmDialog(null, "Ingin Mengubah Data?","Informasi", JOptionPane.YES_NO_OPTION);
+        if (c == JOptionPane.YES_OPTION){
+            try {
+                int s;
+                String sql = "DELETE FROM kamar WHERE id_kamar = '"+tID.getText()+"' ";
+                st = conn.createStatement();
+                s = st.executeUpdate(sql);
+                if (s == 1){
+                    JOptionPane.showMessageDialog(null, "Sukses");
+                    clear();
+                    tampil();
+                }
+            } catch (Exception e){
+                    System.out.println(e.toString());
+            } 
+        }
     }//GEN-LAST:event_bHapusActionPerformed
 
 
