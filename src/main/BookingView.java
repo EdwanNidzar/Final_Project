@@ -4,6 +4,7 @@ import inc.Koneksi;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class BookingView extends javax.swing.JInternalFrame {
@@ -12,6 +13,7 @@ public class BookingView extends javax.swing.JInternalFrame {
         initComponents();
         setKamar();
         setTamu();
+        tampil();
     }
     
     public final Connection conn = new Koneksi().getConnetion();
@@ -43,6 +45,38 @@ public class BookingView extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+    }
+    
+    public void tampil(){
+        Object [] baris = {"NO", "ID Booking","ID Tamu", "ID Tamu", "Tanggal Masuk", "Tanggal Keluar"};
+        tabMode = new DefaultTableModel(null, baris);
+        tableBooking.setModel(tabMode);
+        try {
+                String sql = "SELECT * FROM booking";
+                st = conn.createStatement();
+                rs = st.executeQuery(sql);
+                int no = 0;
+                while (rs.next()){
+                        no++;
+                        String id = rs.getString("id_booking");
+                        String tm = rs.getString("id_tamu");
+                        String km = rs.getString("id_kamar");
+                        String m  = rs.getString("tanggal_masuk");
+                        String k  = rs.getString("tanggal_keluar");
+
+                        Object [] data = {no,id,tm,km,m,k};
+                        tabMode.addRow(data);
+                }
+        } catch (Exception e){
+                System.out.println(e.toString());
+        }
+    }
+    
+    public void clear(){
+        //tID.setText(null);
+        //tNama.setText(null);
+        tAlamat.setText(null);
+        tTelp.setText(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -91,6 +125,16 @@ public class BookingView extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Kamar"));
 
         jLabel2.setText("ID Kamar");
+
+        cKamar.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                cKamarPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         jLabel3.setText("Nomor Kamar");
 
@@ -221,6 +265,16 @@ public class BookingView extends javax.swing.JInternalFrame {
 
         jLabel6.setText("ID Tamu");
 
+        cTamu.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                cTamuPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
         jLabel7.setText("Nama Tamu");
 
         tNamaTamu.setEditable(false);
@@ -277,6 +331,11 @@ public class BookingView extends javax.swing.JInternalFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Button Grup"));
 
         bSimpan.setText("Simpan");
+        bSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSimpanActionPerformed(evt);
+            }
+        });
 
         bHapus.setText("Hapus");
 
@@ -383,6 +442,72 @@ public class BookingView extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cTamuPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cTamuPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        try {
+            String sql = "SELECT * FROM tamu WHERE id_tamu = '"+cTamu.getSelectedItem()+"'";
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()){
+                tNamaTamu.setText(rs.getString("nama"));
+                tAlamat.setText(rs.getString("alamat"));
+                tTelp.setText(rs.getString("no_telp"));
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }//GEN-LAST:event_cTamuPopupMenuWillBecomeInvisible
+
+    private void cKamarPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cKamarPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        try {
+            String sql = "SELECT * FROM kamar WHERE id_kamar = '"+cKamar.getSelectedItem()+"' ";
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()){
+                tNomorKamar.setText(rs.getString("nomor"));
+                tType.setText(rs.getString("type"));
+                tRate.setText(rs.getString("rate"));
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }//GEN-LAST:event_cKamarPopupMenuWillBecomeInvisible
+
+    private void bSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSimpanActionPerformed
+        // TODO add your handling code here:
+        String tgl = cTglM.getSelectedItem().toString();
+        String bln = cBlnM.getSelectedItem().toString();
+        String thn = cThnM.getSelectedItem().toString();
+        String masuk = thn+"-"+bln+"-"+tgl;
+        
+        String tglk = cTglK.getSelectedItem().toString();
+        String blnk = cBlnK.getSelectedItem().toString();
+        String thnk = cThnK.getSelectedItem().toString();
+        String keluar = thnk+"-"+blnk+"-"+tglk;
+        
+        String id_tamu = cTamu.getSelectedItem().toString();
+        String id_kamar = cKamar.getSelectedItem().toString();
+        
+        if (tIdBooking.getText().equals("") || masuk == ""  || keluar == ""){
+            JOptionPane.showMessageDialog(null, "Field Tidak Boleh Kosong");
+        } else {
+            try {
+               int s;
+               String sql = "INSERT INTO booking VALUES ('"+tIdBooking.getText()+"', '"+id_tamu+"', '"+id_kamar+"'  , '"+masuk+"', '"+keluar+"')";
+               st = conn.createStatement();
+               s = st.executeUpdate(sql);
+               if (s == 1){
+                JOptionPane.showMessageDialog(null, "Sukses");
+                clear();
+                tampil();
+               }
+           } catch (Exception e){
+                System.out.println(e.toString());
+           }    
+        }
+    }//GEN-LAST:event_bSimpanActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

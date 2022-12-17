@@ -127,6 +127,9 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="popupMenuWillBecomeInvisible" listener="javax.swing.event.PopupMenuListener" parameters="javax.swing.event.PopupMenuEvent" handler="cKamarPopupMenuWillBecomeInvisible"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -487,6 +490,9 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="popupMenuWillBecomeInvisible" listener="javax.swing.event.PopupMenuListener" parameters="javax.swing.event.PopupMenuEvent" handler="cTamuPopupMenuWillBecomeInvisible"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -571,6 +577,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Simpan"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bSimpanActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="bHapus">
           <Properties>
