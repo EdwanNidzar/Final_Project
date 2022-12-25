@@ -4,6 +4,7 @@ import inc.Koneksi;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -11,12 +12,14 @@ public class KamarView extends javax.swing.JInternalFrame {
 
     public KamarView() {
         initComponents();
+        clear();
         tampil();
     }
     
     public final Connection conn = new Koneksi().getConnetion();
     Statement st;
     ResultSet rs;
+    PreparedStatement pst;
     DefaultTableModel tabMode;
     
     public void tampil(){
@@ -44,10 +47,39 @@ public class KamarView extends javax.swing.JInternalFrame {
     }
     
     public void clear(){
-        tID.setText(null);
+        tID.setText(kodeOtomatis());
         tNomor.setText(null);
         tRate.setText(null);
         tType.setText(null);
+    }
+    
+    public String kodeOtomatis(){
+        String kode = "";
+        try {
+            int kodeLama;
+            pst = conn.prepareStatement("SELECT id_kamar FROM kamar ORDER BY id_kamar DESC");
+            rs = pst.executeQuery();
+            if (!rs.next()){
+                kode = "KMR-0001";
+            } else {
+                kodeLama=Integer.parseInt(rs.getString(1).substring(4))+1;
+                if(kodeLama<10){
+                    kode = "KMR-000"+kodeLama;
+                }
+                else if(kodeLama >= 10 && kodeLama<100){
+                    kode = "KMR-00"+kodeLama;
+                }
+                else if(kodeLama >= 100 && kodeLama<1000){
+                    kode = "KMR-0"+kodeLama;
+                }
+                else{
+                    kode = "KMR-"+kodeLama;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("error kode otomasis : " +e.toString());
+        }
+        return kode;
     }
         
 
@@ -81,6 +113,8 @@ public class KamarView extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Input Data"));
 
         jLabel1.setText("ID Kamar");
+
+        tID.setEditable(false);
 
         jLabel2.setText("Nomor Kamar");
 
@@ -313,7 +347,7 @@ public class KamarView extends javax.swing.JInternalFrame {
 
     private void bHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHapusActionPerformed
         // TODO add your handling code here:
-        int c = JOptionPane.showConfirmDialog(null, "Ingin Mengubah Data?","Informasi", JOptionPane.YES_NO_OPTION);
+        int c = JOptionPane.showConfirmDialog(null, "Ingin Menghapus Data?","Informasi", JOptionPane.YES_NO_OPTION);
         if (c == JOptionPane.YES_OPTION){
             try {
                 int s;

@@ -4,6 +4,7 @@ import inc.Koneksi;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +21,7 @@ public class BookingView extends javax.swing.JInternalFrame {
     public final Connection conn = new Koneksi().getConnetion();
     Statement st;
     ResultSet rs;
+    PreparedStatement pst;
     DefaultTableModel tabMode;
     
     public void setKamar(){
@@ -73,8 +75,37 @@ public class BookingView extends javax.swing.JInternalFrame {
         }
     }
     
+    public String kodeOtomatis(){
+        String kode = "";
+        try {
+            int kodeLama;
+            pst = conn.prepareStatement("SELECT id_booking FROM booking ORDER BY id_booking DESC");
+            rs = pst.executeQuery();
+            if (!rs.next()){
+                kode = "PSN-0001";
+            } else {
+                kodeLama=Integer.parseInt(rs.getString(1).substring(4))+1;
+                if(kodeLama<10){
+                    kode = "PSN-000"+kodeLama;
+                }
+                else if(kodeLama >= 10 && kodeLama<100){
+                    kode = "PSN-00"+kodeLama;
+                }
+                else if(kodeLama >= 100 && kodeLama<1000){
+                    kode = "PSN-0"+kodeLama;
+                }
+                else{
+                    kode = "PSN-"+kodeLama;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("error kode otomasis : " +e.toString());
+        }
+        return kode;
+    }
+    
     public void clear(){
-        tIdBooking.setText(null);
+        tIdBooking.setText(kodeOtomatis());
         
         cTamu.setSelectedItem(null);
         tNamaTamu.setText(null);

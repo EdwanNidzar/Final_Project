@@ -4,6 +4,7 @@ import inc.Koneksi;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -11,12 +12,14 @@ public class TamuView extends javax.swing.JInternalFrame {
 
     public TamuView() {
         initComponents();
+        clear();
         tampil();
     }
     
     public final Connection conn = new Koneksi().getConnetion();
     Statement st;
     ResultSet rs;
+    PreparedStatement pst;
     DefaultTableModel tabMode;
     
     public void tampil(){
@@ -44,11 +47,41 @@ public class TamuView extends javax.swing.JInternalFrame {
     }
     
     public void clear(){
-        tID.setText(null);
+        tID.setText(kodeOtomatis());
         tNama.setText(null);
         tAlamat.setText(null);
         tTelp.setText(null);
     }
+    
+    public String kodeOtomatis(){
+        String kode = "";
+        try {
+            int kodeLama;
+            pst = conn.prepareStatement("SELECT id_tamu FROM tamu ORDER BY id_tamu DESC");
+            rs = pst.executeQuery();
+            if (!rs.next()){
+                kode = "TAMU-0001";
+            } else {
+                kodeLama=Integer.parseInt(rs.getString(1).substring(5))+1;
+                if(kodeLama<10){
+                    kode = "TAMU-000"+kodeLama;
+                }
+                else if(kodeLama >= 10 && kodeLama<100){
+                    kode = "TAMU-00"+kodeLama;
+                }
+                else if(kodeLama >= 100 && kodeLama<1000){
+                    kode = "TAMU-0"+kodeLama;
+                }
+                else{
+                    kode = "TAMU-"+kodeLama;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("error kode otomasis : " +e.toString());
+        }
+        return kode;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
