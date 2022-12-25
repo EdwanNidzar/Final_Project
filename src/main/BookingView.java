@@ -11,6 +11,7 @@ public class BookingView extends javax.swing.JInternalFrame {
 
     public BookingView() {
         initComponents();
+        clear();
         setKamar();
         setTamu();
         tampil();
@@ -73,10 +74,26 @@ public class BookingView extends javax.swing.JInternalFrame {
     }
     
     public void clear(){
-        //tID.setText(null);
-        //tNama.setText(null);
+        tIdBooking.setText(null);
+        
+        cTamu.setSelectedItem(null);
+        tNamaTamu.setText(null);
         tAlamat.setText(null);
         tTelp.setText(null);
+        
+        cKamar.setSelectedItem(null);
+        tNomorKamar.setText(null);
+        tRate.setText(null);
+        tType.setText(null);
+        
+        cBlnK.setSelectedItem(null);
+        cTglK.setSelectedItem(null);
+        cThnK.setSelectedItem(null);
+        
+        cTglM.setSelectedItem(null);
+        cBlnM.setSelectedItem(null);
+        cThnM.setSelectedItem(null);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -195,17 +212,17 @@ public class BookingView extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Tanggal Masuk");
 
-        cTglM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12" }));
+        cTglM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         cThnM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025" }));
 
         jLabel11.setText("Tanggal Keluar");
 
-        cBlnK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        cBlnK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12" }));
 
-        cTglK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12" }));
+        cTglK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        cBlnM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        cBlnM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12" }));
 
         cThnK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025" }));
 
@@ -338,12 +355,32 @@ public class BookingView extends javax.swing.JInternalFrame {
         });
 
         bHapus.setText("Hapus");
+        bHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bHapusActionPerformed(evt);
+            }
+        });
 
         bUbah.setText("Ubah");
+        bUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bUbahActionPerformed(evt);
+            }
+        });
 
         bClear.setText("Clear");
+        bClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bClearActionPerformed(evt);
+            }
+        });
 
         bKeluar.setText("Keluar");
+        bKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bKeluarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -388,6 +425,11 @@ public class BookingView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableBooking.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableBookingMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableBooking);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -508,6 +550,94 @@ public class BookingView extends javax.swing.JInternalFrame {
            }    
         }
     }//GEN-LAST:event_bSimpanActionPerformed
+
+    private void tableBookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBookingMouseClicked
+        // TODO add your handling code here:
+        int baris = tableBooking.getSelectedRow();
+	tIdBooking.setText(tableBooking.getValueAt(baris, 1).toString());
+	cTamu.setSelectedItem(tableBooking.getValueAt(baris, 2).toString());
+        cKamar.setSelectedItem(tableBooking.getValueAt(baris, 3).toString());
+        
+        // tanggal masuk
+        cTglM.setSelectedItem(tableBooking.getValueAt(baris, 4).toString().substring(8, 10));
+        cBlnM.setSelectedItem(tableBooking.getValueAt(baris, 4).toString().substring(5, 7));
+        cThnM.setSelectedItem(tableBooking.getValueAt(baris, 4).toString().substring(0, 4));
+        
+        // tanggal keluar
+        cTglK.setSelectedItem(tableBooking.getValueAt(baris, 5).toString().substring(8, 10));
+        cBlnK.setSelectedItem(tableBooking.getValueAt(baris, 5).toString().substring(5, 7));
+        cThnK.setSelectedItem(tableBooking.getValueAt(baris, 5).toString().substring(0, 4));
+    }//GEN-LAST:event_tableBookingMouseClicked
+
+    private void bKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bKeluarActionPerformed
+        // TODO add your handling code here:
+        int c = JOptionPane.showConfirmDialog(null, "Yakin Ingin Keluar?", null, JOptionPane.YES_NO_OPTION);
+        if (c == JOptionPane.YES_OPTION){
+            dispose();
+        }
+    }//GEN-LAST:event_bKeluarActionPerformed
+
+    private void bClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bClearActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_bClearActionPerformed
+
+    private void bUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUbahActionPerformed
+        // TODO add your handling code here:
+        String tgl = cTglM.getSelectedItem().toString();
+        String bln = cBlnM.getSelectedItem().toString();
+        String thn = cThnM.getSelectedItem().toString();
+        String masuk = thn+"-"+bln+"-"+tgl;
+        
+        String tglk = cTglK.getSelectedItem().toString();
+        String blnk = cBlnK.getSelectedItem().toString();
+        String thnk = cThnK.getSelectedItem().toString();
+        String keluar = thnk+"-"+blnk+"-"+tglk;
+        
+        String id_tamu = cTamu.getSelectedItem().toString();
+        String id_kamar = cKamar.getSelectedItem().toString();
+        
+        int c = JOptionPane.showConfirmDialog(null, "Ingin Mengubah Data "+tIdBooking.getText()+" ?" ,"Informasi", JOptionPane.YES_NO_OPTION);
+        if (c == JOptionPane.YES_OPTION){
+            if (tIdBooking.getText().equals("") || masuk == ""  || keluar == ""){
+                JOptionPane.showMessageDialog(null, "Field Tidak Boleh Kosong");
+            } else {
+                try {
+                   int s;
+                   String sql = "UPDATE booking id_tamu = '"+id_tamu+"', id_kamar = '"+id_kamar+"'  , tanggal_masuk = '"+masuk+"', tanggal_keluar = '"+keluar+"' WHERE id_booking = '"+tIdBooking.getText()+"' ";
+                   st = conn.createStatement();
+                   s = st.executeUpdate(sql);
+                   if (s == 1){
+                    JOptionPane.showMessageDialog(null, "Sukses");
+                    clear();
+                    tampil();
+                   }
+               } catch (Exception e){
+                    System.out.println(e.toString());
+               }    
+            }
+        }  
+    }//GEN-LAST:event_bUbahActionPerformed
+
+    private void bHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHapusActionPerformed
+        // TODO add your handling code here:
+        int c = JOptionPane.showConfirmDialog(null, "Ingin Menghapus Data "+tIdBooking.getText()+" ?","Informasi", JOptionPane.YES_NO_OPTION);
+        if (c == JOptionPane.YES_OPTION){
+            try {
+                int s;
+                String sql = "DELETE FROM booking WHERE id_booking = '"+tIdBooking.getText()+"' ";
+                st = conn.createStatement();
+                s = st.executeUpdate(sql);
+                if (s == 1){
+                    JOptionPane.showMessageDialog(null, "Sukses");
+                    clear();
+                    tampil();
+                }
+            } catch (Exception e){
+                    System.out.println(e.toString());
+            } 
+        }
+    }//GEN-LAST:event_bHapusActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
