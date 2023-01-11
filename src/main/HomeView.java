@@ -5,7 +5,14 @@
  */
 package main;
 
+import inc.Koneksi;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -20,6 +27,8 @@ public class HomeView extends javax.swing.JFrame {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
     }
+    
+    public final Connection conn = new Koneksi().getConnetion();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,6 +47,12 @@ public class HomeView extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        menuReportKamar = new javax.swing.JMenuItem();
+        menuReportTamu = new javax.swing.JMenuItem();
+        menuReportBooking = new javax.swing.JMenuItem();
+        JMenu4 = new javax.swing.JMenu();
+        menuProfile = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +107,46 @@ public class HomeView extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setText("Laporan");
+
+        menuReportKamar.setText("Report Kamar");
+        menuReportKamar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuReportKamarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuReportKamar);
+
+        menuReportTamu.setText("Report Tamu");
+        menuReportTamu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuReportTamuActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuReportTamu);
+
+        menuReportBooking.setText("Report Booking");
+        menuReportBooking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuReportBookingActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuReportBooking);
+
+        jMenuBar1.add(jMenu3);
+
+        JMenu4.setText("Profile");
+
+        menuProfile.setText("Profile");
+        menuProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuProfileActionPerformed(evt);
+            }
+        });
+        JMenu4.add(menuProfile);
+
+        jMenuBar1.add(JMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,6 +193,61 @@ public class HomeView extends javax.swing.JFrame {
         kv.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void menuReportKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReportKamarActionPerformed
+        // TODO add your handling code here:
+        JasperReport reports;
+
+        String path=".\\src\\report\\reportKamar.jasper";
+        try {
+            reports = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jprint = JasperFillManager.fillReport(path, null, conn);
+            JasperViewer jviewer = new JasperViewer(jprint, false);
+            jviewer.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jviewer.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }//GEN-LAST:event_menuReportKamarActionPerformed
+
+    private void menuReportTamuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReportTamuActionPerformed
+        // TODO add your handling code here:
+        JasperReport reports;
+
+        String path=".\\src\\report\\reportTamu.jasper";
+        try {
+            reports = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jprint = JasperFillManager.fillReport(path, null, conn);
+            JasperViewer jviewer = new JasperViewer(jprint, false);
+            jviewer.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jviewer.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }//GEN-LAST:event_menuReportTamuActionPerformed
+
+    private void menuReportBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReportBookingActionPerformed
+        // TODO add your handling code here:
+        JasperReport reports;
+
+        String path=".\\src\\report\\reportBooking.jasper";
+        try {
+            reports = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jprint = JasperFillManager.fillReport(path, null, conn);
+            JasperViewer jviewer = new JasperViewer(jprint, false);
+            jviewer.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jviewer.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }//GEN-LAST:event_menuReportBookingActionPerformed
+
+    private void menuProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProfileActionPerformed
+        // TODO add your handling code here:
+        ProfileView pv = new ProfileView();
+        dPanel.add(pv);
+        pv.setVisible(true);
+    }//GEN-LAST:event_menuProfileActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -174,13 +284,19 @@ public class HomeView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu JMenu4;
     private javax.swing.JDesktopPane dPanel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem menuProfile;
+    private javax.swing.JMenuItem menuReportBooking;
+    private javax.swing.JMenuItem menuReportKamar;
+    private javax.swing.JMenuItem menuReportTamu;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,7 +8,13 @@ import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class BookingView extends javax.swing.JInternalFrame {
 
@@ -393,6 +399,11 @@ public class BookingView extends javax.swing.JInternalFrame {
         });
 
         bCetak.setText("Cetak");
+        bCetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCetakActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -734,6 +745,22 @@ public class BookingView extends javax.swing.JInternalFrame {
         int kembalian = uang - harga;
         tKembalian.setText(String.valueOf(kembalian));
     }//GEN-LAST:event_bHitungActionPerformed
+
+    private void bCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCetakActionPerformed
+        // TODO add your handling code here:
+        JasperReport reports;
+
+        String path=".\\src\\report\\reportBooking.jasper";
+        try {
+            reports = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jprint = JasperFillManager.fillReport(path, null, conn);
+            JasperViewer jviewer = new JasperViewer(jprint, false);
+            jviewer.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            jviewer.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }//GEN-LAST:event_bCetakActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

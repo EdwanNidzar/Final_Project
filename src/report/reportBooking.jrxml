@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c57ac8f4-76ed-49a1-bc9a-f85ef8939c68">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Table Dataset 1" uuid="4302d85c-5224-4af6-8d87-3dbab1ecfd4c"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT booking.id_booking, booking.id_tamu, tamu.nama, tamu.alamat, tamu.no_telp, booking.id_kamar, kamar.nomor, kamar.type, booking.tanggal_masuk, booking.tanggal_keluar, booking.harga, booking.uang_masuk, booking.kembalian FROM booking, tamu, kamar WHERE booking.id_tamu = tamu.id_tamu AND booking.id_kamar = kamar.id_kamar]]>
+	</queryString>
+	<field name="id_booking" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_tamu" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="alamat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_telp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_kamar" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tanggal_masuk" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tanggal_keluar" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="harga" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uang_masuk" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kembalian" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="75" y="0" width="576" height="57" uuid="941e727f-d61d-4f95-b3c1-cec9a9dd00d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Booking]]></text>
+			</staticText>
+			<image>
+				<reportElement x="651" y="0" width="225" height="68" uuid="6c401071-4fde-4dcf-b01b-7622c519aa53"/>
+				<imageExpression><![CDATA["C:\\Users\\nidza\\Downloads\\cropped-logo-uniska-ok.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="0" y="0" width="225" height="68" uuid="18cc0178-e8b2-4f4b-9bcb-903f74bfa83d"/>
+				<imageExpression><![CDATA["C:\\Users\\nidza\\Downloads\\cropped-logo-uniska-ok.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="62" height="36" uuid="18aecada-7a48-4d0d-a46e-47dc3325902c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Booking]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="0" width="54" height="36" uuid="8be87328-ed1b-49af-9404-c350b5d3e94a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Tamu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="0" width="55" height="36" uuid="4ec70bcf-7437-4a08-9c9d-9e7c2b8889ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Tamu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="0" width="75" height="36" uuid="7ecd9ed0-e0d0-4150-a638-f6a15de16401"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Alamat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="246" y="0" width="71" height="36" uuid="c7c3ae2f-4c30-4c02-a1b8-f3197546d2f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nomor Telpon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="0" width="49" height="36" uuid="73b579a6-3fb5-4233-b7c6-313d375bd4f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Kamar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="0" width="50" height="35" uuid="c4a92f63-0e0b-4bc0-9a98-6470a6decda8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nomor Kamar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="416" y="0" width="59" height="35" uuid="ba4606b2-9f10-4333-ad5e-d087a23e31d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="475" y="0" width="63" height="35" uuid="d4fddbd5-be76-4a7c-8b46-ef4b1856a238"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal Masuk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="538" y="0" width="62" height="35" uuid="efbce664-627b-45de-b62e-44239b8bb63b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal Keluar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="0" width="45" height="35" uuid="fedb903b-6bd8-4e10-b171-a51e08a240df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="645" y="0" width="58" height="35" uuid="413179fe-d641-471b-8703-c09778575ddb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Uang Masuk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="703" y="1" width="49" height="35" uuid="4f0306ab-6287-4172-9459-b485b0086048"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[kembalian]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="62" height="35" uuid="3f3d1b29-2597-4bfb-bff5-e9e7e9f9fb9e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id_booking}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="0" width="54" height="35" uuid="28d5343b-1100-48a4-9906-f5f14d5bf3f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id_tamu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="0" width="55" height="35" uuid="3f585e20-9446-45f5-93b0-97ca7f28eeed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="0" width="75" height="35" uuid="96e4d4b2-98b1-4d2a-94bf-78b4aea1abf9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="246" y="0" width="71" height="35" uuid="26bffa69-b3aa-4aec-8e3a-cadce6bd537e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{no_telp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="317" y="0" width="49" height="35" uuid="120a1f68-8d81-46f3-b7ec-36a112ec3027"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id_kamar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="366" y="0" width="50" height="35" uuid="c0b2f485-c771-4733-8a61-6c9942459e9c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nomor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="0" width="59" height="35" uuid="9a574146-2ba8-4d5e-803f-1719966ba883"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="0" width="63" height="35" uuid="0019b727-4cb1-4b0d-8033-cd2e1a90d232"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tanggal_masuk}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="538" y="0" width="62" height="35" uuid="0be77c8a-cebb-4660-aba8-3eef49512f80"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tanggal_keluar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="45" height="35" uuid="dc0374ac-b288-4020-b655-3d60f21cc2a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="645" y="0" width="58" height="35" uuid="985aa5a8-c32a-4dc9-91d9-9cede4b4af01"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{uang_masuk}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="703" y="0" width="49" height="35" uuid="d77b13c7-07ec-45e3-b422-dd981730b837"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{kembalian}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="633" y="0" width="80" height="20" uuid="53921019-27a6-45d0-938f-5f6a7d51e776"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="713" y="0" width="40" height="20" uuid="c22365ee-f8f8-4d09-8bbb-9b56d6446119"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="100" height="20" uuid="d0efe294-0e78-463c-bcba-18d6a77bfd29"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
