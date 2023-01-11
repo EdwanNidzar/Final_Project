@@ -32,6 +32,9 @@ public class ProfileView extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
+        setClosable(true);
+        setTitle("Profile");
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/PasPhotoEdwan.jpg"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N

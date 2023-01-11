@@ -117,6 +117,9 @@ public class KamarView extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableKamar = new javax.swing.JTable();
 
+        setClosable(true);
+        setTitle("Kamar");
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Input Data"));
 
         jLabel1.setText("ID Kamar");

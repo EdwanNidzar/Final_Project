@@ -55,6 +55,7 @@ public class HomeView extends javax.swing.JFrame {
         menuProfile = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Aplikasi Objek Wisata ");
 
         javax.swing.GroupLayout dPanelLayout = new javax.swing.GroupLayout(dPanel);
         dPanel.setLayout(dPanelLayout);

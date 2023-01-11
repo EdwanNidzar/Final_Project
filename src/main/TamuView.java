@@ -112,6 +112,9 @@ public class TamuView extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableTamu = new javax.swing.JTable();
 
+        setClosable(true);
+        setTitle("Tamu");
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Input Data"));
 
         jLabel1.setText("ID Tamu");

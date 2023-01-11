@@ -184,6 +184,9 @@ public class BookingView extends javax.swing.JInternalFrame {
         bHitung = new javax.swing.JButton();
         tKembalian = new javax.swing.JTextField();
 
+        setClosable(true);
+        setTitle("Booking");
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Kamar"));
 
         jLabel2.setText("ID Kamar");
