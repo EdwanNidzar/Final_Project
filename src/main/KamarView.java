@@ -36,9 +36,9 @@ public class KamarView extends javax.swing.JInternalFrame {
                         String id = rs.getString("id_kamar");
                         String nk = rs.getString("nomor");
                         String tk = rs.getString("type");
-                        String rk = rs.getString("rate");
+                        String hr = rs.getString("harga");
 
-                        Object [] data = {no,id,nk,tk,rk};
+                        Object [] data = {no,id,nk,tk,hr};
                         tabMode.addRow(data);
                 }
         } catch (Exception e){
@@ -49,8 +49,8 @@ public class KamarView extends javax.swing.JInternalFrame {
     public void clear(){
         tID.setText(kodeOtomatis());
         tNomor.setText(null);
-        tRate.setText(null);
-        tType.setText(null);
+        tHarga.setText(null);
+        cType.setSelectedItem(null);
     }
     
     public String kodeOtomatis(){
@@ -97,15 +97,15 @@ public class KamarView extends javax.swing.JInternalFrame {
         tID = new javax.swing.JTextField();
         tNomor = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        tType = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        tRate = new javax.swing.JTextField();
+        tHarga = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         bKeluar = new javax.swing.JButton();
         bClear = new javax.swing.JButton();
         bHapus = new javax.swing.JButton();
         bUbah = new javax.swing.JButton();
         bSimpan = new javax.swing.JButton();
+        cType = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableKamar = new javax.swing.JTable();
@@ -120,7 +120,7 @@ public class KamarView extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Type");
 
-        jLabel4.setText("Rate");
+        jLabel4.setText("Harga");
 
         bKeluar.setText("Keluar");
         bKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +157,17 @@ public class KamarView extends javax.swing.JInternalFrame {
             }
         });
 
+        cType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy Room", "Standard Room", "Superior Room", "Deluxe Room", "Suite Room", "Penthouse Room" }));
+        cType.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                cTypePopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -172,10 +183,10 @@ public class KamarView extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tRate)
-                            .addComponent(tType)
+                            .addComponent(tHarga)
                             .addComponent(tID)
-                            .addComponent(tNomor)))
+                            .addComponent(tNomor)
+                            .addComponent(cType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(bSimpan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -202,11 +213,11 @@ public class KamarView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(tType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(tRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bKeluar)
@@ -214,7 +225,7 @@ public class KamarView extends javax.swing.JInternalFrame {
                     .addComponent(bHapus)
                     .addComponent(bUbah)
                     .addComponent(bSimpan))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Data Kamar"));
@@ -280,12 +291,12 @@ public class KamarView extends javax.swing.JInternalFrame {
 
     private void bSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSimpanActionPerformed
         // TODO add your handling code here:
-        if (tID.getText().equals("") || tNomor.getText().equals("") || tType.getText().equals("") || tRate.getText().equals("") ){
+        if (tID.getText().equals("") || tNomor.getText().equals("") || cType.getSelectedItem().equals("") || tHarga.getText().equals("") ){
             JOptionPane.showMessageDialog(null, "Field Tidak Boleh Kosong");
         } else {
             try {
                int s;
-               String sql = "INSERT INTO kamar VALUES ('"+tID.getText()+"', '"+tNomor.getText()+"', '"+tType.getText()+"', '"+tRate.getText()+"')";
+               String sql = "INSERT INTO kamar VALUES ('"+tID.getText()+"', '"+tNomor.getText()+"', '"+cType.getSelectedItem()+"', '"+tHarga.getText()+"')";
                st = conn.createStatement();
                s = st.executeUpdate(sql);
                if (s == 1){
@@ -304,8 +315,8 @@ public class KamarView extends javax.swing.JInternalFrame {
         int baris = tableKamar.getSelectedRow();
 	tID.setText(tableKamar.getValueAt(baris, 1).toString());
 	tNomor.setText(tableKamar.getValueAt(baris, 2).toString());
-	tType.setText(tableKamar.getValueAt(baris, 3).toString());
-        tRate.setText(tableKamar.getValueAt(baris, 4).toString());
+	cType.setSelectedItem(tableKamar.getValueAt(baris, 3).toString());
+        tHarga.setText(tableKamar.getValueAt(baris, 4).toString());
     }//GEN-LAST:event_tableKamarMouseClicked
 
     private void bClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bClearActionPerformed
@@ -325,12 +336,12 @@ public class KamarView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int c = JOptionPane.showConfirmDialog(null, "Ingin Mengubah Data?","Informasi", JOptionPane.YES_NO_OPTION);
         if (c == JOptionPane.YES_OPTION){
-            if (tID.getText().equals("") || tNomor.getText().equals("") || tType.getText().equals("") || tRate.getText().equals("") ){
+            if (tID.getText().equals("") || tNomor.getText().equals("") || cType.getSelectedItem().equals("") || tHarga.getText().equals("") ){
                 JOptionPane.showMessageDialog(null, "Field Tidak Boleh Kosong");
             } else {
                 try {
                     int s;
-                    String sql = "UPDATE kamar SET nomor = '"+tNomor.getText()+"', type = '"+tType.getText()+"', rate = '"+tRate.getText()+"' WHERE id_kamar = '"+tID.getText()+"' ";
+                    String sql = "UPDATE kamar SET nomor = '"+tNomor.getText()+"', type = '"+cType.getSelectedItem()+"', rate = '"+tHarga.getText()+"' WHERE id_kamar = '"+tID.getText()+"' ";
                     st = conn.createStatement();
                     s = st.executeUpdate(sql);
                     if (s == 1){
@@ -365,6 +376,23 @@ public class KamarView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_bHapusActionPerformed
 
+    private void cTypePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cTypePopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        if (cType.getSelectedItem().equals("Economy Room")){
+            tHarga.setText("100000");
+        } else if (cType.getSelectedItem().equals("Standard Room")){
+            tHarga.setText("200000");
+        } else if (cType.getSelectedItem().equals("Superior Room")){
+            tHarga.setText("300000");
+        } else if (cType.getSelectedItem().equals("Deluxe Room")){
+            tHarga.setText("500000");
+        } else if (cType.getSelectedItem().equals("Suite Room")){
+            tHarga.setText("800000");
+        } else if (cType.getSelectedItem().equals("Penthouse Room")){
+            tHarga.setText("1000000");
+        } 
+    }//GEN-LAST:event_cTypePopupMenuWillBecomeInvisible
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bClear;
@@ -372,6 +400,7 @@ public class KamarView extends javax.swing.JInternalFrame {
     private javax.swing.JButton bKeluar;
     private javax.swing.JButton bSimpan;
     private javax.swing.JButton bUbah;
+    private javax.swing.JComboBox<String> cType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -379,10 +408,9 @@ public class KamarView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField tHarga;
     private javax.swing.JTextField tID;
     private javax.swing.JTextField tNomor;
-    private javax.swing.JTextField tRate;
-    private javax.swing.JTextField tType;
     private javax.swing.JTable tableKamar;
     // End of variables declaration//GEN-END:variables
 }

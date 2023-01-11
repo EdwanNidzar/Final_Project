@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -51,23 +53,31 @@ public class BookingView extends javax.swing.JInternalFrame {
     }
     
     public void tampil(){
-        Object [] baris = {"NO", "ID Booking","ID Tamu", "ID Tamu", "Tanggal Masuk", "Tanggal Keluar"};
+        Object [] baris = {"NO", "ID Booking", "ID Tamu", "Nama", "Alamat", "Nomor Telp", "ID Kamar", "Nomor Kamar", "Type Kamar", "Tanggal Masuk", "Tanggal Keluar","Harga", "Uang Masuk", "Kembalian"};
         tabMode = new DefaultTableModel(null, baris);
         tableBooking.setModel(tabMode);
         try {
-                String sql = "SELECT * FROM booking";
+                String sql = "SELECT booking.id_booking, booking.id_tamu, tamu.nama, tamu.alamat, tamu.no_telp, booking.id_kamar, kamar.nomor, kamar.type, booking.tanggal_masuk, booking.tanggal_keluar, booking.harga, booking.uang_masuk, booking.kembalian FROM booking, tamu, kamar WHERE booking.id_tamu = tamu.id_tamu AND booking.id_kamar = kamar.id_kamar";
                 st = conn.createStatement();
                 rs = st.executeQuery(sql);
                 int no = 0;
                 while (rs.next()){
                         no++;
                         String id = rs.getString("id_booking");
-                        String tm = rs.getString("id_tamu");
-                        String km = rs.getString("id_kamar");
-                        String m  = rs.getString("tanggal_masuk");
-                        String k  = rs.getString("tanggal_keluar");
+                        String tamu = rs.getString("id_tamu");
+                        String nama = rs.getString("nama");
+                        String alamat = rs.getString("alamat");
+                        String telp = rs.getString("no_telp");
+                        String kamar = rs.getString("id_kamar");
+                        String nomor = rs.getString("nomor");
+                        String type = rs.getString("type");
+                        String masuk  = rs.getString("tanggal_masuk");
+                        String keluar  = rs.getString("tanggal_keluar");
+                        String harga = rs.getString("harga");
+                        String uang = rs.getString("uang_masuk");
+                        String kembalian = rs.getString("kembalian");
 
-                        Object [] data = {no,id,tm,km,m,k};
+                        Object [] data = {no,id,tamu,nama,alamat,telp,kamar,nomor,type,masuk,keluar,harga,uang,kembalian};
                         tabMode.addRow(data);
                 }
         } catch (Exception e){
@@ -114,16 +124,11 @@ public class BookingView extends javax.swing.JInternalFrame {
         
         cKamar.setSelectedItem(null);
         tNomorKamar.setText(null);
-        tRate.setText(null);
+        tHarga.setText(null);
         tType.setText(null);
         
-        cBlnK.setSelectedItem(null);
-        cTglK.setSelectedItem(null);
-        cThnK.setSelectedItem(null);
-        
-        cTglM.setSelectedItem(null);
-        cBlnM.setSelectedItem(null);
-        cThnM.setSelectedItem(null);
+        tgl_masuk.setDate(null);
+        tgl_keluar.setDate(null);
         
     }
 
@@ -139,18 +144,14 @@ public class BookingView extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         tType = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        tRate = new javax.swing.JTextField();
+        tHarga = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tIdBooking = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        cTglM = new javax.swing.JComboBox<>();
-        cThnM = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
-        cBlnK = new javax.swing.JComboBox<>();
-        cTglK = new javax.swing.JComboBox<>();
-        cBlnM = new javax.swing.JComboBox<>();
-        cThnK = new javax.swing.JComboBox<>();
+        tgl_masuk = new com.toedter.calendar.JDateChooser();
+        tgl_keluar = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         cTamu = new javax.swing.JComboBox<>();
@@ -166,9 +167,16 @@ public class BookingView extends javax.swing.JInternalFrame {
         bUbah = new javax.swing.JButton();
         bClear = new javax.swing.JButton();
         bKeluar = new javax.swing.JButton();
+        bCetak = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableBooking = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        tUangMasuk = new javax.swing.JTextField();
+        bHitung = new javax.swing.JButton();
+        tKembalian = new javax.swing.JTextField();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Kamar"));
 
@@ -192,9 +200,9 @@ public class BookingView extends javax.swing.JInternalFrame {
 
         tType.setEditable(false);
 
-        jLabel5.setText("Rate");
+        jLabel5.setText("Harga");
 
-        tRate.setEditable(false);
+        tHarga.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -210,7 +218,7 @@ public class BookingView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cKamar, 0, 196, Short.MAX_VALUE)
-                    .addComponent(tRate)
+                    .addComponent(tHarga)
                     .addComponent(tNomorKamar)
                     .addComponent(tType))
                 .addContainerGap())
@@ -233,8 +241,8 @@ public class BookingView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(tRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Input Data Booking"));
@@ -243,19 +251,7 @@ public class BookingView extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Tanggal Masuk");
 
-        cTglM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-
-        cThnM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025" }));
-
         jLabel11.setText("Tanggal Keluar");
-
-        cBlnK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12" }));
-
-        cTglK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-
-        cBlnM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "08", "10", "11", "12" }));
-
-        cThnK.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -264,27 +260,14 @@ public class BookingView extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(cTglM, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cBlnM, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cThnM, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(tIdBooking)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cTglK, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cBlnK, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(cThnK, 0, 64, Short.MAX_VALUE)))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tgl_keluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tIdBooking, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                    .addComponent(tgl_masuk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -295,17 +278,13 @@ public class BookingView extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(tIdBooking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
-                    .addComponent(cTglM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cThnM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cBlnM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tgl_masuk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(cTglK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cBlnK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cThnK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tgl_keluar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -413,12 +392,14 @@ public class BookingView extends javax.swing.JInternalFrame {
             }
         });
 
+        bCetak.setText("Cetak");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(303, 303, 303)
+                .addGap(461, 461, 461)
                 .addComponent(bSimpan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bHapus)
@@ -427,20 +408,23 @@ public class BookingView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bClear)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bCetak)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bKeluar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bSimpan)
                     .addComponent(bHapus)
                     .addComponent(bUbah)
                     .addComponent(bClear)
-                    .addComponent(bKeluar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bKeluar)
+                    .addComponent(bCetak))
+                .addContainerGap())
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Data Booking"));
@@ -476,8 +460,60 @@ public class BookingView extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Pembayaran"));
+
+        jLabel12.setText("Uang Masuk");
+
+        jLabel13.setText("Kembalian");
+
+        bHitung.setText("Hitung");
+        bHitung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bHitungActionPerformed(evt);
+            }
+        });
+
+        tKembalian.setEditable(false);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bHitung))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tUangMasuk)
+                            .addComponent(tKembalian, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(tUangMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(bHitung)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel13))
+                    .addComponent(tKembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -495,7 +531,8 @@ public class BookingView extends javax.swing.JInternalFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -505,7 +542,8 @@ public class BookingView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -541,7 +579,7 @@ public class BookingView extends javax.swing.JInternalFrame {
             if (rs.next()){
                 tNomorKamar.setText(rs.getString("nomor"));
                 tType.setText(rs.getString("type"));
-                tRate.setText(rs.getString("rate"));
+                tHarga.setText(rs.getString("harga"));
             }
         } catch (Exception e) {
             System.out.println(e.toString());
@@ -550,25 +588,28 @@ public class BookingView extends javax.swing.JInternalFrame {
 
     private void bSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSimpanActionPerformed
         // TODO add your handling code here:
-        String tgl = cTglM.getSelectedItem().toString();
-        String bln = cBlnM.getSelectedItem().toString();
-        String thn = cThnM.getSelectedItem().toString();
-        String masuk = thn+"-"+bln+"-"+tgl;
-        
-        String tglk = cTglK.getSelectedItem().toString();
-        String blnk = cBlnK.getSelectedItem().toString();
-        String thnk = cThnK.getSelectedItem().toString();
-        String keluar = thnk+"-"+blnk+"-"+tglk;
-        
         String id_tamu = cTamu.getSelectedItem().toString();
         String id_kamar = cKamar.getSelectedItem().toString();
         
-        if (tIdBooking.getText().equals("") || masuk == ""  || keluar == ""){
-            JOptionPane.showMessageDialog(null, "Field Tidak Boleh Kosong");
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        String masuk = String.valueOf(dateformat.format(tgl_masuk.getDate()));
+        String keluar = String.valueOf(dateformat.format(tgl_keluar.getDate()));
+        
+        if (tIdBooking.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "ID Booking Tidak Boleh Kosong");
+            tIdBooking.requestFocus();
+        } else if (tgl_masuk.getDate().equals(null)){
+            JOptionPane.showMessageDialog(null, "Tanggal Masuk Tidak Boleh Kosong");
+        } else if (tgl_keluar.getDate().equals(null)){
+            JOptionPane.showMessageDialog(null, "Tanggal Keluar Tidak Boleh Kosong");
+        } else if (cTamu.getSelectedItem().equals(null)){
+            JOptionPane.showMessageDialog(null, "Silahkan Pilih Tamu");
+        } else if (cKamar.getSelectedItem().equals(null)){
+            JOptionPane.showMessageDialog(null, "Silahkan Pilih Kamar");
         } else {
             try {
                int s;
-               String sql = "INSERT INTO booking VALUES ('"+tIdBooking.getText()+"', '"+id_tamu+"', '"+id_kamar+"'  , '"+masuk+"', '"+keluar+"')";
+               String sql = "INSERT INTO booking VALUES ('"+tIdBooking.getText()+"', '"+id_tamu+"', '"+id_kamar+"'  , '"+masuk+"', '"+keluar+"', '"+tHarga.getText()+"', '"+tUangMasuk.getText()+"', '"+tKembalian.getText()+"' )";
                st = conn.createStatement();
                s = st.executeUpdate(sql);
                if (s == 1){
@@ -584,20 +625,33 @@ public class BookingView extends javax.swing.JInternalFrame {
 
     private void tableBookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableBookingMouseClicked
         // TODO add your handling code here:
-        int baris = tableBooking.getSelectedRow();
-	tIdBooking.setText(tableBooking.getValueAt(baris, 1).toString());
-	cTamu.setSelectedItem(tableBooking.getValueAt(baris, 2).toString());
-        cKamar.setSelectedItem(tableBooking.getValueAt(baris, 3).toString());
-        
-        // tanggal masuk
-        cTglM.setSelectedItem(tableBooking.getValueAt(baris, 4).toString().substring(8, 10));
-        cBlnM.setSelectedItem(tableBooking.getValueAt(baris, 4).toString().substring(5, 7));
-        cThnM.setSelectedItem(tableBooking.getValueAt(baris, 4).toString().substring(0, 4));
-        
-        // tanggal keluar
-        cTglK.setSelectedItem(tableBooking.getValueAt(baris, 5).toString().substring(8, 10));
-        cBlnK.setSelectedItem(tableBooking.getValueAt(baris, 5).toString().substring(5, 7));
-        cThnK.setSelectedItem(tableBooking.getValueAt(baris, 5).toString().substring(0, 4));
+        try {
+            int baris = tableBooking.getSelectedRow();
+            tIdBooking.setText(tableBooking.getValueAt(baris, 1).toString());
+            cTamu.setSelectedItem(tableBooking.getValueAt(baris, 2).toString());
+            tNamaTamu.setText(tableBooking.getValueAt(baris,3).toString());
+            tAlamat.setText(tableBooking.getValueAt(baris,4).toString());
+            tTelp.setText(tableBooking.getValueAt(baris,5).toString());
+            
+            cKamar.setSelectedItem(tableBooking.getValueAt(baris, 6).toString());
+            tNomorKamar.setText(tableBooking.getValueAt(baris,7).toString());
+            tType.setText(tableBooking.getValueAt(baris,8).toString());
+            
+            String masuk = tableBooking.getValueAt(baris, 9).toString();
+            Date stanggal = new SimpleDateFormat("yyyy-MM-dd").parse(masuk);
+            tgl_masuk.setDate(stanggal);
+            
+            String keluar = tableBooking.getValueAt(baris, 10).toString();
+            Date tanggal = new SimpleDateFormat("yyyy-MM-dd").parse(keluar);
+            tgl_keluar.setDate(tanggal);
+            
+            tHarga.setText(tableBooking.getValueAt(baris,11).toString());
+            tUangMasuk.setText(tableBooking.getValueAt(baris,12).toString());
+            tKembalian.setText(tableBooking.getValueAt(baris,13).toString());
+            
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }//GEN-LAST:event_tableBookingMouseClicked
 
     private void bKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bKeluarActionPerformed
@@ -615,37 +669,40 @@ public class BookingView extends javax.swing.JInternalFrame {
 
     private void bUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bUbahActionPerformed
         // TODO add your handling code here:
-        String tgl = cTglM.getSelectedItem().toString();
-        String bln = cBlnM.getSelectedItem().toString();
-        String thn = cThnM.getSelectedItem().toString();
-        String masuk = thn+"-"+bln+"-"+tgl;
-        
-        String tglk = cTglK.getSelectedItem().toString();
-        String blnk = cBlnK.getSelectedItem().toString();
-        String thnk = cThnK.getSelectedItem().toString();
-        String keluar = thnk+"-"+blnk+"-"+tglk;
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
+        String masuk = String.valueOf(dateformat.format(tgl_masuk.getDate()));
+        String keluar = String.valueOf(dateformat.format(tgl_keluar.getDate()));
         
         String id_tamu = cTamu.getSelectedItem().toString();
         String id_kamar = cKamar.getSelectedItem().toString();
         
         int c = JOptionPane.showConfirmDialog(null, "Ingin Mengubah Data "+tIdBooking.getText()+" ?" ,"Informasi", JOptionPane.YES_NO_OPTION);
         if (c == JOptionPane.YES_OPTION){
-            if (tIdBooking.getText().equals("") || masuk == ""  || keluar == ""){
-                JOptionPane.showMessageDialog(null, "Field Tidak Boleh Kosong");
+            if (tIdBooking.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "ID Booking Tidak Boleh Kosong");
+                tIdBooking.requestFocus();
+            } else if (tgl_masuk.getDate().equals(null)){
+                JOptionPane.showMessageDialog(null, "Tanggal Masuk Tidak Boleh Kosong");
+            } else if (tgl_keluar.getDate().equals(null)){
+                JOptionPane.showMessageDialog(null, "Tanggal Keluar Tidak Boleh Kosong");
+            } else if (cTamu.getSelectedItem().equals(null)){
+                JOptionPane.showMessageDialog(null, "Silahkan Pilih Tamu");
+            } else if (cKamar.getSelectedItem().equals(null)){
+                JOptionPane.showMessageDialog(null, "Silahkan Pilih Kamar");
             } else {
-                try {
-                   int s;
-                   String sql = "UPDATE booking id_tamu = '"+id_tamu+"', id_kamar = '"+id_kamar+"'  , tanggal_masuk = '"+masuk+"', tanggal_keluar = '"+keluar+"' WHERE id_booking = '"+tIdBooking.getText()+"' ";
-                   st = conn.createStatement();
-                   s = st.executeUpdate(sql);
-                   if (s == 1){
-                    JOptionPane.showMessageDialog(null, "Sukses");
-                    clear();
-                    tampil();
-                   }
-               } catch (Exception e){
-                    System.out.println(e.toString());
-               }    
+                    try {
+                       int s;
+                       String sql = "UPDATE booking id_tamu = '"+id_tamu+"', id_kamar = '"+id_kamar+"'  , tanggal_masuk = '"+masuk+"', tanggal_keluar = '"+keluar+"', harga = '"+tHarga.getText()+"', uang_masuk = '"+tUangMasuk.getText()+"', kembalian = '"+tKembalian.getText()+"' WHERE id_booking = '"+tIdBooking.getText()+"' ";
+                       st = conn.createStatement();
+                       s = st.executeUpdate(sql);
+                       if (s == 1){
+                        JOptionPane.showMessageDialog(null, "Sukses");
+                        clear();
+                        tampil();
+                       }
+                    } catch (Exception e){
+                        System.out.println(e.toString());
+                    }    
             }
         }  
     }//GEN-LAST:event_bUbahActionPerformed
@@ -670,24 +727,30 @@ public class BookingView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_bHapusActionPerformed
 
+    private void bHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHitungActionPerformed
+        // TODO add your handling code here:
+        int harga = Integer.parseInt(tHarga.getText());
+        int uang = Integer.parseInt(tUangMasuk.getText());
+        int kembalian = uang - harga;
+        tKembalian.setText(String.valueOf(kembalian));
+    }//GEN-LAST:event_bHitungActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bCetak;
     private javax.swing.JButton bClear;
     private javax.swing.JButton bHapus;
+    private javax.swing.JButton bHitung;
     private javax.swing.JButton bKeluar;
     private javax.swing.JButton bSimpan;
     private javax.swing.JButton bUbah;
-    private javax.swing.JComboBox<String> cBlnK;
-    private javax.swing.JComboBox<String> cBlnM;
     private javax.swing.JComboBox<String> cKamar;
     private javax.swing.JComboBox<String> cTamu;
-    private javax.swing.JComboBox<String> cTglK;
-    private javax.swing.JComboBox<String> cTglM;
-    private javax.swing.JComboBox<String> cThnK;
-    private javax.swing.JComboBox<String> cThnM;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -701,14 +764,19 @@ public class BookingView extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField tAlamat;
+    private javax.swing.JTextField tHarga;
     private javax.swing.JTextField tIdBooking;
+    private javax.swing.JTextField tKembalian;
     private javax.swing.JTextField tNamaTamu;
     private javax.swing.JTextField tNomorKamar;
-    private javax.swing.JTextField tRate;
     private javax.swing.JTextField tTelp;
     private javax.swing.JTextField tType;
+    private javax.swing.JTextField tUangMasuk;
     private javax.swing.JTable tableBooking;
+    private com.toedter.calendar.JDateChooser tgl_keluar;
+    private com.toedter.calendar.JDateChooser tgl_masuk;
     // End of variables declaration//GEN-END:variables
 }

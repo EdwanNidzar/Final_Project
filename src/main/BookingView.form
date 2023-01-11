@@ -30,7 +30,8 @@
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel6" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -45,6 +46,7 @@
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
                   <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jPanel6" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
@@ -79,7 +81,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="cKamar" pref="196" max="32767" attributes="0"/>
-                      <Component id="tRate" max="32767" attributes="0"/>
+                      <Component id="tHarga" max="32767" attributes="0"/>
                       <Component id="tNomorKamar" alignment="0" max="32767" attributes="0"/>
                       <Component id="tType" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -108,9 +110,9 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tRate" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tHarga" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -156,10 +158,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Rate"/>
+            <Property name="text" type="java.lang.String" value="Harga"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tRate">
+        <Component class="javax.swing.JTextField" name="tHarga">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
@@ -181,32 +183,15 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cTglM" min="-2" pref="64" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="cBlnM" min="-2" pref="64" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="cThnM" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="tIdBooking" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="cTglK" min="-2" pref="64" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="cBlnK" min="-2" pref="64" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Component id="cThnK" pref="64" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="tgl_keluar" max="32767" attributes="0"/>
+                      <Component id="tIdBooking" pref="216" max="32767" attributes="0"/>
+                      <Component id="tgl_masuk" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -221,18 +206,14 @@
                       <Component id="tIdBooking" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cTglM" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cThnM" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cBlnM" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                      <Component id="tgl_masuk" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cTglK" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cBlnK" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cThnK" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                      <Component id="tgl_keluar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -252,170 +233,14 @@
             <Property name="text" type="java.lang.String" value="Tanggal Masuk"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cTglM">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="31">
-                <StringItem index="0" value="01"/>
-                <StringItem index="1" value="02"/>
-                <StringItem index="2" value="03"/>
-                <StringItem index="3" value="04"/>
-                <StringItem index="4" value="05"/>
-                <StringItem index="5" value="06"/>
-                <StringItem index="6" value="07"/>
-                <StringItem index="7" value="08"/>
-                <StringItem index="8" value="08"/>
-                <StringItem index="9" value="10"/>
-                <StringItem index="10" value="11"/>
-                <StringItem index="11" value="12"/>
-                <StringItem index="12" value="13"/>
-                <StringItem index="13" value="14"/>
-                <StringItem index="14" value="15"/>
-                <StringItem index="15" value="16"/>
-                <StringItem index="16" value="17"/>
-                <StringItem index="17" value="18"/>
-                <StringItem index="18" value="19"/>
-                <StringItem index="19" value="20"/>
-                <StringItem index="20" value="21"/>
-                <StringItem index="21" value="22"/>
-                <StringItem index="22" value="23"/>
-                <StringItem index="23" value="24"/>
-                <StringItem index="24" value="25"/>
-                <StringItem index="25" value="26"/>
-                <StringItem index="26" value="27"/>
-                <StringItem index="27" value="28"/>
-                <StringItem index="28" value="29"/>
-                <StringItem index="29" value="30"/>
-                <StringItem index="30" value="31"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cThnM">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="2022"/>
-                <StringItem index="1" value="2023"/>
-                <StringItem index="2" value="2024"/>
-                <StringItem index="3" value="2025"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tanggal Keluar"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cBlnK">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="12">
-                <StringItem index="0" value="01"/>
-                <StringItem index="1" value="02"/>
-                <StringItem index="2" value="03"/>
-                <StringItem index="3" value="04"/>
-                <StringItem index="4" value="05"/>
-                <StringItem index="5" value="06"/>
-                <StringItem index="6" value="07"/>
-                <StringItem index="7" value="08"/>
-                <StringItem index="8" value="08"/>
-                <StringItem index="9" value="10"/>
-                <StringItem index="10" value="11"/>
-                <StringItem index="11" value="12"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
+        <Component class="com.toedter.calendar.JDateChooser" name="tgl_masuk">
         </Component>
-        <Component class="javax.swing.JComboBox" name="cTglK">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="31">
-                <StringItem index="0" value="01"/>
-                <StringItem index="1" value="02"/>
-                <StringItem index="2" value="03"/>
-                <StringItem index="3" value="04"/>
-                <StringItem index="4" value="05"/>
-                <StringItem index="5" value="06"/>
-                <StringItem index="6" value="07"/>
-                <StringItem index="7" value="08"/>
-                <StringItem index="8" value="08"/>
-                <StringItem index="9" value="10"/>
-                <StringItem index="10" value="11"/>
-                <StringItem index="11" value="12"/>
-                <StringItem index="12" value="13"/>
-                <StringItem index="13" value="14"/>
-                <StringItem index="14" value="15"/>
-                <StringItem index="15" value="16"/>
-                <StringItem index="16" value="17"/>
-                <StringItem index="17" value="18"/>
-                <StringItem index="18" value="19"/>
-                <StringItem index="19" value="20"/>
-                <StringItem index="20" value="21"/>
-                <StringItem index="21" value="22"/>
-                <StringItem index="22" value="23"/>
-                <StringItem index="23" value="24"/>
-                <StringItem index="24" value="25"/>
-                <StringItem index="25" value="26"/>
-                <StringItem index="26" value="27"/>
-                <StringItem index="27" value="28"/>
-                <StringItem index="28" value="29"/>
-                <StringItem index="29" value="30"/>
-                <StringItem index="30" value="31"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cBlnM">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="12">
-                <StringItem index="0" value="01"/>
-                <StringItem index="1" value="02"/>
-                <StringItem index="2" value="03"/>
-                <StringItem index="3" value="04"/>
-                <StringItem index="4" value="05"/>
-                <StringItem index="5" value="06"/>
-                <StringItem index="6" value="07"/>
-                <StringItem index="7" value="08"/>
-                <StringItem index="8" value="08"/>
-                <StringItem index="9" value="10"/>
-                <StringItem index="10" value="11"/>
-                <StringItem index="11" value="12"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cThnK">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="2022"/>
-                <StringItem index="1" value="2023"/>
-                <StringItem index="2" value="2024"/>
-                <StringItem index="3" value="2025"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
+        <Component class="com.toedter.calendar.JDateChooser" name="tgl_keluar">
         </Component>
       </SubComponents>
     </Container>
@@ -542,7 +367,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="303" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="461" max="-2" attributes="0"/>
                   <Component id="bSimpan" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="bHapus" min="-2" max="-2" attributes="0"/>
@@ -551,6 +376,8 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="bClear" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="bCetak" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="bKeluar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -558,16 +385,17 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="bSimpan" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bHapus" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bUbah" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bClear" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bKeluar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="bCetak" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -613,6 +441,11 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bKeluarActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JButton" name="bCetak">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cetak"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel5">
@@ -638,7 +471,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="364" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="362" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -666,6 +499,91 @@
             </Component>
           </SubComponents>
         </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel6">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Pembayaran"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="bHitung" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tUangMasuk" max="32767" attributes="0"/>
+                              <Component id="tKembalian" pref="228" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tUangMasuk" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="bHitung" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="tKembalian" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel12">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Uang Masuk"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel13">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Kembalian"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tUangMasuk">
+        </Component>
+        <Component class="javax.swing.JButton" name="bHitung">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Hitung"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bHitungActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tKembalian">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
