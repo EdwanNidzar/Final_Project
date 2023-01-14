@@ -706,7 +706,7 @@ public class BookingView extends javax.swing.JInternalFrame {
             } else {
                     try {
                        int s;
-                       String sql = "UPDATE booking id_tamu = '"+id_tamu+"', id_kamar = '"+id_kamar+"'  , tanggal_masuk = '"+masuk+"', tanggal_keluar = '"+keluar+"', harga = '"+tHarga.getText()+"', uang_masuk = '"+tUangMasuk.getText()+"', kembalian = '"+tKembalian.getText()+"' WHERE id_booking = '"+tIdBooking.getText()+"' ";
+                       String sql = "UPDATE booking SET id_tamu = '"+id_tamu+"', id_kamar = '"+id_kamar+"'  , tanggal_masuk = '"+masuk+"', tanggal_keluar = '"+keluar+"', harga = '"+tHarga.getText()+"', uang_masuk = '"+tUangMasuk.getText()+"', kembalian = '"+tKembalian.getText()+"' WHERE id_booking = '"+tIdBooking.getText()+"' ";
                        st = conn.createStatement();
                        s = st.executeUpdate(sql);
                        if (s == 1){
