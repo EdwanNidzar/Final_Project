@@ -362,7 +362,7 @@ public class KamarView extends javax.swing.JInternalFrame {
             } else {
                 try {
                     int s;
-                    String sql = "UPDATE kamar SET nomor = '"+tNomor.getText()+"', type = '"+cType.getSelectedItem()+"', rate = '"+tHarga.getText()+"' WHERE id_kamar = '"+tID.getText()+"' ";
+                    String sql = "UPDATE kamar SET nomor = '"+tNomor.getText()+"', type = '"+cType.getSelectedItem()+"', harga = '"+tHarga.getText()+"' WHERE id_kamar = '"+tID.getText()+"' ";
                     st = conn.createStatement();
                     s = st.executeUpdate(sql);
                     if (s == 1){
