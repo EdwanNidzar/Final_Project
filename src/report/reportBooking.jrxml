@@ -59,12 +59,12 @@
 				<text><![CDATA[Laporan Booking]]></text>
 			</staticText>
 			<image>
-				<reportElement x="651" y="0" width="225" height="68" uuid="6c401071-4fde-4dcf-b01b-7622c519aa53"/>
-				<imageExpression><![CDATA["C:\\Users\\nidza\\Downloads\\cropped-logo-uniska-ok.jpg"]]></imageExpression>
+				<reportElement x="668" y="0" width="107" height="79" uuid="f5cec5d7-730b-4e81-9083-8e7efb168650"/>
+				<imageExpression><![CDATA["C:\\Users\\nidza\\OneDrive\\Documents\\NetBeansProjects\\Final_Project\\src\\assets\\cropped-logo-uniska-ok.jpg"]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="0" y="0" width="225" height="68" uuid="18cc0178-e8b2-4f4b-9bcb-903f74bfa83d"/>
-				<imageExpression><![CDATA["C:\\Users\\nidza\\Downloads\\cropped-logo-uniska-ok.jpg"]]></imageExpression>
+				<reportElement x="0" y="0" width="107" height="79" uuid="19180b35-bd35-48d8-b80c-e6ef4300a923"/>
+				<imageExpression><![CDATA["C:\\Users\\nidza\\OneDrive\\Documents\\NetBeansProjects\\Final_Project\\src\\assets\\cropped-logo-uniska-ok.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -167,7 +167,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="62" height="35" uuid="3f3d1b29-2597-4bfb-bff5-e9e7e9f9fb9e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>

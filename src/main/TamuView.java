@@ -307,7 +307,7 @@ public class TamuView extends javax.swing.JInternalFrame {
                st = conn.createStatement();
                s = st.executeUpdate(sql);
                if (s == 1){
-                JOptionPane.showMessageDialog(null, "Sukses");
+                JOptionPane.showMessageDialog(null, "Data Berhasil Disimpan");
                 clear();
                 tampil();
                }
@@ -345,7 +345,7 @@ public class TamuView extends javax.swing.JInternalFrame {
                    st = conn.createStatement();
                    s = st.executeUpdate(sql);
                    if (s == 1){
-                    JOptionPane.showMessageDialog(null, "Sukses");
+                    JOptionPane.showMessageDialog(null, "Data Berhasil Diubah");
                     clear();
                     tampil();
                    }
@@ -366,7 +366,7 @@ public class TamuView extends javax.swing.JInternalFrame {
                 st = conn.createStatement();
                 s = st.executeUpdate(sql);
                 if (s == 1){
-                    JOptionPane.showMessageDialog(null, "Sukses");
+                    JOptionPane.showMessageDialog(null, "Dihapus");
                     clear();
                     tampil();
                 }
